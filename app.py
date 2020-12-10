@@ -37,7 +37,7 @@ def auth():
 def api_auth():
     print(request.args.get('m'))
     if request.args.get('m') == 'reg':
-        try:
+        if 1 == 1:
 
             login = request.args.get('login')
 
@@ -57,9 +57,9 @@ def api_auth():
 
             return redirect("/")
             
-        except Exception as e:
-            print(e)
-            return redirect("/auth?err=This login already used")
+        #except Exception as e:
+            #print(e)
+            #return redirect("/auth?err=This login already used")
     elif request.args.get('m') == 'log':
         try:
         
@@ -110,4 +110,4 @@ def go(e):
 if __name__ == "__main__":
     app.secret_key = 'super secret key'
     app.config['SESSION_TYPE'] = 'filesystem'
-    app.run(port=5555)
+    app.run(debug=True)
