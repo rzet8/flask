@@ -109,4 +109,4 @@ def go(e):
 if __name__ == "__main__":
     application.secret_key = 'super secret key'
     application.config['SESSION_TYPE'] = 'filesystem'
-    application.run(host="85.174.196.190", port=5555)
+    application.run(port=5555)
