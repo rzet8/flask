@@ -6,12 +6,12 @@ import threading
 from flask import Flask, \
     render_template, request, redirect, url_for, make_response, session
 
-application = Flask(__name__)
+app = Flask(__name__)
 db = sql.connect("eu-cdbr-west-03.cleardb.net","b6c312c632ac2c", "ac11d03d", "heroku_21197fac3394bf1")
 cursor = db.cursor()
 lock = threading.Lock()
 
-@application.route("/")
+@app.route("/")
 def chat():
     try:
         token = session['token']
@@ -25,7 +25,7 @@ def chat():
         return redirect("/auth")
     return token
 
-@application.route("/auth")
+@app.route("/auth")
 def auth():
     if request.args.get('err'):
         return render_template("auth.html", err=request.args.get('err'))
@@ -33,7 +33,7 @@ def auth():
     else:
         return render_template("auth.html")
 
-@application.route("/api/auth")
+@app.route("/api/auth")
 def api_auth():
     print(request.args.get('m'))
     if request.args.get('m') == 'reg':
@@ -89,11 +89,11 @@ def api_auth():
         return "Error method"
         
 
-@application.route("/profile/<string:id>")
+@app.route("/profile/<string:id>")
 def profile(id):
     return id
 
-@application.route("/logout")
+@app.route("/logout")
 def logout():
     try:
         session['token'] = "logout"
@@ -101,12 +101,12 @@ def logout():
         pass
     return redirect("/auth")
 
-@application.errorhandler(404)
+@app.errorhandler(404)
 def go(e):
     return redirect("/")
 
 
 if __name__ == "__main__":
-    application.secret_key = 'super secret key'
-    application.config['SESSION_TYPE'] = 'filesystem'
-    application.run(port=5555)
+    app.secret_key = 'super secret key'
+    app.config['SESSION_TYPE'] = 'filesystem'
+    app.run(port=5555)
