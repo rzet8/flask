@@ -57,7 +57,8 @@ def api_auth():
 
             return redirect("/")
             
-        except:
+        except Exception as e:
+            print(e)
             return redirect("/auth?err=This login already used")
     elif request.args.get('m') == 'log':
         try:
