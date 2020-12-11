@@ -41,14 +41,20 @@ body {
   z-index: 2;
 }
 .form-auth input[type="email"] {
+  -webkit-appearance: none;
   margin-bottom: -1px;
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
 }
 .form-auth input[type="password"] {
+  -webkit-appearance: none;
   margin-bottom: 10px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
+}
+
+button{
+  -webkit-appearance: none;
 }
 
 @keyframes auth {
